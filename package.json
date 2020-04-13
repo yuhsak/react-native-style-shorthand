@@ -1,0 +1,52 @@
+{
+  "name": "react-native-style-shorthand",
+  "version": "0.60.0",
+  "description": "Small set of utilities which makes you never be tired of styling components.",
+  "files": [
+    "lib",
+    "src",
+    "tsconfig.json",
+    "tsconfig.esm.json"
+  ],
+  "main": "lib/common/index.js",
+  "module": "lib/esm/index.js",
+  "types": "lib/esm/index.d.ts",
+  "scripts": {
+    "clean": "rimraf lib",
+    "prebuild": "npm run clean",
+    "build": "tsc -b tsconfig.json tsconfig.esm.json",
+    "watch": "npm run build -- --watch",
+    "start": "npm run watch",
+    "test:type": "tsc --noEmit --incremental false",
+    "test:impl": "jest",
+    "test": "run-p test:*"
+  },
+  "author": "Yuhsak Inoue",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "devDependencies": {
+    "@babel/runtime": "^7.9.2",
+    "@testing-library/react-hooks": "^3.2.1",
+    "@types/jest": "^25.2.1",
+    "@types/react": "^16.9.23",
+    "@types/react-native": "^0.61.17",
+    "husky": "^4.2.5",
+    "jest": "^25.3.0",
+    "npm-run-all": "^4.1.5",
+    "react": "^16.9.0",
+    "react-native": "^0.61.5",
+    "react-test-renderer": "^16.13.1",
+    "rimraf": "^3.0.2",
+    "ts-jest": "^25.3.1",
+    "typescript": "^3.8.3"
+  },
+  "dependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test"
+    }
+  }
+}
