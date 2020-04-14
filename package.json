@@ -2,11 +2,19 @@
   "name": "react-native-style-shorthand",
   "version": "0.60.0",
   "description": "Small set of utilities which makes you never be tired of styling components.",
+  "author": "Yuhsak Inoue",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Yuhsak/react-native-style-shorthand"
+  },
   "files": [
     "lib",
+    "!lib/**/*.tsbuildinfo",
     "src",
     "tsconfig.json",
-    "tsconfig.esm.json"
+    "tsconfig.esm.json",
+    "catalog.md"
   ],
   "main": "lib/common/index.js",
   "module": "lib/esm/index.js",
@@ -21,8 +29,6 @@
     "test:impl": "jest",
     "test": "run-p test:*"
   },
-  "author": "Yuhsak Inoue",
-  "license": "MIT",
   "peerDependencies": {
     "react": "*",
     "react-native": "*"
