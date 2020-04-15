@@ -1,7 +1,7 @@
 {
   "name": "react-native-style-shorthand",
   "version": "0.60.1",
-  "description": "Small set of utilities which makes you never be tired of styling components.",
+  "description": "Small utility to style components in shothanded way.",
   "keywords": ["react", "react-native", "react-native-web", "stylesheet", "ui"],
   "author": "Yuhsak Inoue",
   "license": "MIT",

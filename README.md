@@ -1,6 +1,6 @@
 # react-native-style-shorthand
 
-Never be tired of styling components.
+Small utility to style components in shothanded way.
 
 ## Motivation
 
