@@ -1,6 +1,6 @@
 {
   "name": "react-native-style-shorthand",
-  "version": "0.60.1",
+  "version": "0.60.2",
   "description": "Small utility to style components in shothanded way.",
   "keywords": ["react", "react-native", "react-native-web", "stylesheet", "ui"],
   "author": "Yuhsak Inoue",
@@ -28,7 +28,8 @@
     "start": "npm run watch",
     "test:type": "tsc --noEmit --incremental false",
     "test:impl": "jest",
-    "test": "run-p test:*"
+    "test": "run-p test:*",
+    "prepublishOnly": "npm run test && npm run build"
   },
   "peerDependencies": {
     "react": "*",
