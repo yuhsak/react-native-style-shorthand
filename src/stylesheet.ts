@@ -3,7 +3,7 @@ import {
 } from 'react'
 
 import {
-  StyleSheet
+  StyleSheet as RNStyleSheet
 } from 'react-native'
 
 import type {
@@ -26,13 +26,13 @@ export const deepFlatten = (obj: object):any[] => (
       : [obj]
 )
 
-export const flatten = <S extends SS.Some>(style: StyleProp<S>):S => StyleSheet.flatten(style)
+export const flatten = <S extends SS.Some>(style: StyleProp<S>):S => RNStyleSheet.flatten(style)
 
 export type Nullish = undefined|null
 export type Compose<T, T2> = T extends Nullish ? T2 : T2 extends Nullish ? T : [T, T2]
 
 export const compose = <S1 extends SS.Some, S2 extends SS.Some>(s1: StyleProp<S1>, s2: StyleProp<S2>):StyleProp<Compose<S1, S2>> => (
-  StyleSheet.compose(s1, s2 as any)
+  RNStyleSheet.compose(s1, s2 as any)
 )
 
 export const create = <T extends Record<string, SS.Some>>(styles: T ):T => styles as any
@@ -166,4 +166,13 @@ export const restore = <SS extends SS.Some>(props?: StyleProp<SS>) => {
     elevation: style.el
   })) as Restore<SS>
 
+}
+
+export const StyleSheet = {
+  ...RNStyleSheet,
+  create,
+  useMemo,
+  compose,
+  flatten,
+  restore
 }

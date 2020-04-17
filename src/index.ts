@@ -27,21 +27,9 @@ export {
   useStyleShorthand
 } from './hooks'
 
-import {
-  create,
-  useMemo,
-  compose,
-  flatten,
-  restore
+export {
+  StyleSheet
 } from './stylesheet'
-
-export const StyleSheet = {
-  create,
-  useMemo,
-  compose,
-  flatten,
-  restore
-}
 
 export {
   fc,
