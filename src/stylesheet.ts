@@ -7,7 +7,10 @@ import {
 } from 'react-native'
 
 import type {
-  StyleProp
+  StyleProp,
+  ViewStyle,
+  TextStyle,
+  ImageStyle
 } from 'react-native'
 
 import type {
@@ -15,6 +18,12 @@ import type {
   FilterUndefined,
   SS
 } from './types'
+
+export namespace RNSS {
+  export type Some = ViewStyle | TextStyle | ImageStyle
+}
+
+export type SomeStyle = RNSS.Some | SS.Some
 
 export const emptyObject = {}
 
@@ -26,18 +35,18 @@ export const deepFlatten = (obj: object):any[] => (
       : [obj]
 )
 
-export const flatten = <S extends SS.Some>(style: StyleProp<S>):S => RNStyleSheet.flatten(style)
+export const flatten = <S extends SomeStyle>(style: StyleProp<S>):S => RNStyleSheet.flatten(style)
 
 export type Nullish = undefined|null
 export type Compose<T, T2> = T extends Nullish ? T2 : T2 extends Nullish ? T : [T, T2]
 
-export const compose = <S1 extends SS.Some, S2 extends SS.Some>(s1: StyleProp<S1>, s2: StyleProp<S2>):StyleProp<Compose<S1, S2>> => (
+export const compose = <S1 extends SomeStyle, S2 extends SomeStyle>(s1: StyleProp<S1>, s2: StyleProp<S2>):StyleProp<Compose<S1, S2>> => (
   RNStyleSheet.compose(s1, s2 as any)
 )
 
-export const create = <T extends Record<string, SS.Some>>(styles: T ):T => styles as any
+export const create = <T extends Record<string, SomeStyle>>(styles: T ):T => styles as any
 
-export const useMemo = <T extends Record<string, SS.Some>>(style: T ):T => RNuseMemo(() => style, deepFlatten(style)) as any
+export const useMemo = <T extends Record<string, SomeStyle>>(style: T ):T => RNuseMemo(() => style, deepFlatten(style)) as any
 
 export const filterUndefined = <T>(obj: T):Partial<FilterUndefined<T>> =>(
   Object.entries(obj)
