@@ -12,10 +12,6 @@ import {
   useMemo
 } from '../src/stylesheet'
 
-import type {
-  SS
-} from '../src/types'
-
 import {
   Shorthand,
   Style
@@ -39,11 +35,11 @@ describe('General functions', () => {
         }
       }]
     }]
-  
+
     const c = [0,1,2,3,4,5,6,7,8,9]
-  
+
     expect(deepFlatten(q)).toStrictEqual(c)
-  
+
   })
 
   test('flatten', () => {

@@ -13,9 +13,14 @@ import type {
   ImageStyle
 } from 'react-native'
 
+import {
+  emptyObject,
+  filterUndefined,
+  flatMap,
+} from './util'
+
 import type {
   Restore,
-  FilterUndefined,
   SS
 } from './types'
 
@@ -25,13 +30,11 @@ export namespace RNSS {
 
 export type SomeStyle = RNSS.Some | SS.Some
 
-export const emptyObject = {}
-
 export const deepFlatten = (obj: object):any[] => (
   Array.isArray(obj)
-    ? obj.flatMap(deepFlatten)
+    ? flatMap(obj, deepFlatten)
     : typeof obj === 'object'
-      ? Object.values(obj).flatMap(deepFlatten)
+      ? flatMap(Object.values(obj), deepFlatten)
       : [obj]
 )
 
@@ -47,12 +50,6 @@ export const compose = <S1 extends SomeStyle, S2 extends SomeStyle>(s1: StylePro
 export const create = <T extends Record<string, SomeStyle>>(styles: T ):T => styles as any
 
 export const useMemo = <T extends Record<string, SomeStyle>>(style: T ):T => RNuseMemo(() => style, deepFlatten(style)) as any
-
-export const filterUndefined = <T>(obj: T):Partial<FilterUndefined<T>> =>(
-  Object.entries(obj)
-    .filter((kv) => kv[1] !== undefined)
-    .reduce((acc, [k, v]) => ({...acc, [k]: v}), {})
-)
 
 export const restore = <SS extends SS.Some>(props?: StyleProp<SS>) => {
 
