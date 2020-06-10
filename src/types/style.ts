@@ -1,5 +1,5 @@
 import type {
-  FlexStyle, 
+  FlexStyle,
   ShadowStyleIOS,
   TransformsStyle,
   ViewStyle,
@@ -659,14 +659,14 @@ export type HandleOffset<T> = HandleTextShadowOffset<HandleShadowOffset<T>>
 
 /**
  * Restore shorthand style prop keys
- * 
+ *
  * ex.) `{m: number | string, f: number}` => `{margin: number | string, flex: number}`
  */
 export type Restore<T> = ExtractBrand<T> extends never ? FilterUnknown<MapKey<HandleSO<NonNullable<T>>, AllSSMap>> extends infer A ? A : never : ExtractBrand<T>
 
 /**
  * Shorten style prop keys
- * 
+ *
  * ex.) `{margin: number | string, flex: number}` => `{m: number | string, f: number}`
  */
 export type Shorten<T> = SSWithBrand<HandleOffset<FilterUnknown<MapKey<NonNullable<T>, AllSSMapOp>>> extends infer A ? A : never, T>

@@ -1,6 +1,6 @@
 {
   "name": "react-native-style-shorthand",
-  "version": "0.60.4",
+  "version": "0.60.5",
   "description": "Small utility to style components in shothanded way.",
   "keywords": ["react", "react-native", "react-native-web", "stylesheet", "ui"],
   "author": "Yuhsak Inoue",
