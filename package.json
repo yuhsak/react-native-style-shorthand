@@ -1,6 +1,6 @@
 {
   "name": "react-native-style-shorthand",
-  "version": "0.63.4",
+  "version": "0.63.41",
   "description": "Small utility to style components in shothanded way.",
   "keywords": [
     "react",
@@ -57,10 +57,5 @@
     "ts-jest": "^25.3.1",
     "typescript": "^4.3.5"
   },
-  "dependencies": {},
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm test"
-    }
-  }
+  "dependencies": {}
 }
