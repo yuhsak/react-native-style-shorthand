@@ -1,6 +1,29 @@
-import type { FlexStyle, ShadowStyleIOS, TransformsStyle, ViewStyle, TextStyle, TextStyleIOS, TextStyleAndroid, ImageStyle, Animated, ColorValue } from 'react-native'
+import type { FlexStyle, ShadowStyleIOS, TransformsStyle, ViewStyle, TextStyle, TextStyleIOS, TextStyleAndroid, ImageStyle, Animated } from 'react-native'
 
 import type { SwitchKV, MapKey, FilterUnknown } from './util'
+
+export type Value = Animated.Value
+
+export type AnimatedInterpolation = Animated.AnimatedInterpolation
+
+export type Nullable = undefined | null
+export type Primitive = string | number | boolean | symbol
+export type Builtin = Function | Date | Error | RegExp
+
+export interface WithAnimatedArray<P> extends Array<WithAnimatedValue<P>> {}
+export type WithAnimatedObject<T> = {
+  [K in keyof T]: WithAnimatedValue<T[K]>
+}
+
+export type WithAnimatedValue<T> = T extends Builtin | Nullable
+  ? T
+  : T extends Primitive
+  ? T | Value | AnimatedInterpolation
+  : T extends Array<infer P>
+  ? WithAnimatedArray<P>
+  : T extends {}
+  ? WithAnimatedObject<T>
+  : T
 
 export type ViewBaseStyle = {
   backfaceVisibility?: ViewStyle['backfaceVisibility']
@@ -403,6 +426,10 @@ export type ViewBaseSS = {
  */
 export type ViewSS = ViewBaseSS & BaseSS
 
+export type AnimatedViewStyle = WithAnimatedValue<ViewStyle>
+
+export type AnimatedViewSS = WithAnimatedValue<ViewSS>
+
 export type TextBaseSSIOSMap = {
   ftv: 'fontVariant'
   ls: 'letterSpacing'
@@ -513,6 +540,10 @@ export type TextBaseSS = {
  */
 export type TextSS = TextBaseSS & TextSSIOS & TextSSAndroid & ViewSS
 
+export type AnimatedTextStyle = WithAnimatedValue<TextStyle>
+
+export type AnimatedTextSS = WithAnimatedValue<TextSS>
+
 export type ImageBaseSSMap = {
   rm: 'resizeMode'
   bv: 'backfaceVisibility'
@@ -568,10 +599,14 @@ export type ImageBaseSS = {
  */
 export type ImageSS = ImageBaseSS & BaseSS
 
+export type AnimatedImageStyle = WithAnimatedValue<ImageStyle>
+
+export type AnimatedImageSS = WithAnimatedValue<ImageSS>
+
 /**
  * Shorthand of all style
  */
-export type AllSS = ViewSS & TextSS & ImageSS
+export type AllSS = ViewSS & TextSS & ImageSS & AnimatedViewSS & AnimatedTextSS & AnimatedImageSS
 export type AllSSMap = ViewSSMap & TextSSMap & ImageSSMap
 export type AllSSMapOp = SwitchKV<AllSSMap>
 
@@ -589,14 +624,17 @@ export namespace SS {
   export type Base = SSWithBrand<BaseSS, FlexStyle & ShadowStyleIOS & TransformsStyle>
   export type ViewBase = SSWithBrand<ViewBaseSS, ViewBaseStyle>
   export type View = SSWithBrand<ViewSS, ViewStyle>
+  export type AnimatedView = SSWithBrand<AnimatedViewSS, AnimatedViewStyle>
   export type TextBaseIOS = SSWithBrand<TextBaseSSIOS, TextBaseStyleIOS>
   export type TextIOS = SSWithBrand<TextSSIOS, TextStyleIOS>
   export type TextBaseAndroid = SSWithBrand<TextBaseSSAndroid, TextBaseStyleAndroid>
   export type TextAndroid = SSWithBrand<TextSSAndroid, TextStyleAndroid>
   export type TextBase = SSWithBrand<TextBaseSS, TextBaseStyle>
   export type Text = SSWithBrand<TextSS, TextStyle>
+  export type AnimatedText = SSWithBrand<AnimatedTextSS, AnimatedTextStyle>
   export type ImageBase = SSWithBrand<ImageBaseSS, ImageBaseStyle>
   export type Image = SSWithBrand<ImageSS, ImageStyle>
+  export type AnimatedImage = SSWithBrand<AnimatedImageSS, AnimatedImageStyle>
   export type All = SSWithBrand<AllSS, ViewStyle & TextStyle & ImageStyle>
   export type Some = View | Text | Image
 }
@@ -611,14 +649,17 @@ export namespace MAP {
   export type Base = BaseSSMap
   export type ViewBase = ViewBaseSSMap
   export type View = ViewSSMap
+  export type AnimatedView = ViewSSMap
   export type TextBaseIOS = TextBaseSSIOSMap
   export type TextIOS = TextSSIOSMap
   export type TextBaseAndroid = TextBaseSSAndroidMap
   export type TextAndroid = TextSSAndroidMap
   export type TextBase = TextBaseSSMap
   export type Text = TextSSMap
+  export type AnimatedText = TextSSMap
   export type ImageBase = ImageBaseSSMap
   export type Image = ImageSSMap
+  export type AnimatedImage = ImageSSMap
   export type All = AllSSMap
 }
 
@@ -651,26 +692,3 @@ export type Restore<T> = ExtractBrand<T> extends never ? (FilterUnknown<MapKey<H
  * ex.) `{margin: number | string, flex: number}` => `{m: number | string, f: number}`
  */
 export type Shorten<T> = SSWithBrand<HandleOffset<FilterUnknown<MapKey<NonNullable<T>, AllSSMapOp>>> extends infer A ? A : never, T>
-
-export type Value = Animated.Value
-
-export type AnimatedInterpolation = Animated.AnimatedInterpolation
-
-type Nullable = undefined | null
-type Primitive = string | number | boolean | symbol
-type Builtin = Function | Date | Error | RegExp
-
-interface WithAnimatedArray<P> extends Array<WithAnimatedValue<P>> {}
-type WithAnimatedObject<T> = {
-  [K in keyof T]: WithAnimatedValue<T[K]>
-}
-
-export type WithAnimatedValue<T> = T extends Builtin | Nullable
-  ? T
-  : T extends Primitive
-  ? T | Value | AnimatedInterpolation
-  : T extends Array<infer P>
-  ? WithAnimatedArray<P>
-  : T extends {}
-  ? WithAnimatedObject<T>
-  : T
