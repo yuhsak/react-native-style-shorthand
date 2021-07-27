@@ -2,7 +2,7 @@ import React from 'react'
 
 import type { ComponentType, ComponentProps, PropsWithChildren, ForwardRefRenderFunction, FC } from 'react'
 
-import type { FlatList, FlatListProps, SectionList, SectionListProps } from 'react-native'
+import type { FlatList, FlatListProps, SectionList, SectionListProps, Animated, View, Text, Image } from 'react-native'
 
 import { useStyleShorthand, UseStyleShorthandOptions } from './hooks'
 
@@ -122,7 +122,7 @@ export const enhanceAnimatedWithRef = <T extends ComponentType<any>, SS>(Compone
  * (Typically for ReactNative.Animated.View)
  */
 export const enhanceAnimatedViewWithRef = <T extends ComponentType<any>>(Component: T, opts?: UseStyleShorthandOptions) =>
-  forwardRef<T, ComponentProps<T>, SS.AnimatedView>(renderWithRef(Component), opts)
+  forwardRef<T, ComponentProps<typeof View>, SS.AnimatedView>(renderWithRef(Component), opts)
 
 /**
  * Enhance style shorthand with ref for animated text
@@ -130,7 +130,7 @@ export const enhanceAnimatedViewWithRef = <T extends ComponentType<any>>(Compone
  * (Typically for ReactNative.Animated.Text)
  */
 export const enhanceAnimatedTextWithRef = <T extends ComponentType<any>>(Component: T, opts?: UseStyleShorthandOptions) =>
-  forwardRef<T, ComponentProps<T>, SS.AnimatedText>(renderWithRef(Component), opts)
+  forwardRef<T, ComponentProps<typeof Text>, SS.AnimatedText>(renderWithRef(Component), opts)
 
 /**
  * Enhance style shorthand with ref for animated image
@@ -138,4 +138,4 @@ export const enhanceAnimatedTextWithRef = <T extends ComponentType<any>>(Compone
  * (Typically for ReactNative.Animated.Image)
  */
 export const enhanceAnimatedImageWithRef = <T extends ComponentType<any>>(Component: T, opts?: UseStyleShorthandOptions) =>
-  forwardRef<T, ComponentProps<T>, SS.AnimatedImage>(renderWithRef(Component), opts)
+  forwardRef<T, ComponentProps<typeof Image>, SS.AnimatedImage>(renderWithRef(Component), opts)
