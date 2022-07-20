@@ -8,7 +8,6 @@ import {
   ImageBackground as RNImageBackground,
   KeyboardAvoidingView as RNKeyboardAvoidingView,
   Modal as RNModal,
-  Picker as RNPicker,
   RefreshControl as RNRefreshControl,
   SafeAreaView as RNSafeAreaView,
   ScrollView as RNScrollView,
@@ -26,7 +25,14 @@ import {
   Animated as RNAnimated,
 } from 'react-native'
 
-import { enhanceViewWithRef, enhanceImageWithRef, enhanceTextWithRef, enhanceAnimatedViewWithRef, enhanceAnimatedTextWithRef, enhanceAnimatedImageWithRef } from './hoc'
+import {
+  enhanceViewWithRef,
+  enhanceImageWithRef,
+  enhanceTextWithRef,
+  enhanceAnimatedViewWithRef,
+  enhanceAnimatedTextWithRef,
+  enhanceAnimatedImageWithRef,
+} from './hoc'
 
 /**
  * ActivityIndicator Component with style shorthand
@@ -62,11 +68,6 @@ export const KeyboardAvoidingView = enhanceViewWithRef(RNKeyboardAvoidingView, {
  * Modal Component with style shorthand
  */
 export const Modal = enhanceViewWithRef(RNModal, { memoize: false })
-
-/**
- * Picker Component with style shorthand
- */
-export const Picker = enhanceViewWithRef(RNPicker, { memoize: false })
 
 /**
  * RefreshControl Component with style shorthand
